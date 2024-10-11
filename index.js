@@ -9,7 +9,6 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use('/api', cryptoRoutes);
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
@@ -28,6 +27,8 @@ const connectDB = async () => {
 app.get('/', (req, res) => {
   res.send('Welcome to the KoinX API!');
 });
+
+app.use('/api', cryptoRoutes);
 
 cron.schedule('0 */2 * * *', () => {
   console.log('Fetching cryptocurrency data...');
